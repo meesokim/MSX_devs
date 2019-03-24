@@ -1,0 +1,421 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           screen
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSINIT                       
+     00000000  l__HEADER                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000001  l__GSFINAL                      
+     0000001D  l__HEADER0                      
+     00003233  l__CODE                         
+     00004020  s__CODE                         
+     00007253  s__GSFINAL                      
+     00007253  s__GSINIT                       
+     0000C000  s__BSS                          
+     0000C000  s__DATA                         
+     0000C000  s__HOME                         
+     0000C000  s__INITIALIZED                  
+     0000C000  s__INITIALIZER                  
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004020  _putchar                           
+     00004020  _putchar_start                     
+     00004020  crt0msx.32k.4000.40                
+     00004022  crt0msx.32k.4000.41                
+     00004026  crt0msx.32k.4000.42                
+     00004028  crt0msx.32k.4000.44                
+     0000402B  crt0msx.32k.4000.45                
+     0000402D  crt0msx.32k.4000.46                
+     0000402F  crt0msx.32k.4000.48                
+     00004031  crt0msx.32k.4000.49                
+     00004034  crt0msx.32k.4000.50                
+     00004036  crt0msx.32k.4000.52                
+     00004039  crt0msx.32k.4000.53                
+     0000403B  crt0msx.32k.4000.54                
+     0000403C  _getchar                           
+     0000403C  _getchar_start                     
+     0000403C  _putchar_end                       
+     0000403C  crt0msx.32k.4000.64                
+     0000403F  crt0msx.32k.4000.65                
+     00004041  crt0msx.32k.4000.66                
+     00004042  crt0msx.32k.4000.67                
+     00004043  __initrleblock                     
+     00004043  _getchar_end                       
+     00004043  crt0msx.32k.4000.82                
+     00004044  crt0msx.32k.4000.83                
+     00004045  crt0msx.32k.4000.85                
+     00004046  crt0msx.32k.4000.88                
+     00004047  crt0msx.32k.4000.89                
+     00004048  crt0msx.32k.4000.91                
+     0000404A  crt0msx.32k.4000.92                
+     0000404D  crt0msx.32k.4000.94                
+     0000404E  crt0msx.32k.4000.95                
+     0000404F  crt0msx.32k.4000.97                
+     00004050  crt0msx.32k.4000.98                
+     00004051  crt0msx.32k.4000.99                
+     00004052  crt0msx.32k.4000.100               
+     00004055  crt0msx.32k.4000.101               
+     00004058  crt0msx.32k.4000.104               
+     00004059  crt0msx.32k.4000.105               
+     0000405A  crt0msx.32k.4000.106               
+     0000405D  crt0msx.32k.4000.109               
+     0000405E  crt0msx.32k.4000.110               
+     0000405F  crt0msx.32k.4000.111               
+     00004060  crt0msx.32k.4000.112               
+     00004061  crt0msx.32k.4000.113               
+     00004062  crt0msx.32k.4000.114               
+     00004065  crt0msx.32k.4000.115               
+     00004068  crt0msx.32k.4000.118               
+     00004069  crt0msx.32k.4000.119               
+     0000406A  crt0msx.32k.4000.136               
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000406A  find_rom_page_2                    
+     0000406D  crt0msx.32k.4000.137               
+     0000406E  crt0msx.32k.4000.138               
+     0000406F  crt0msx.32k.4000.139               
+     00004070  crt0msx.32k.4000.140               
+     00004071  crt0msx.32k.4000.141               
+     00004072  crt0msx.32k.4000.142               
+     00004074  crt0msx.32k.4000.144               
+     00004075  crt0msx.32k.4000.145               
+     00004076  crt0msx.32k.4000.147               
+     00004077  crt0msx.32k.4000.149               
+     0000407A  crt0msx.32k.4000.150               
+     0000407B  crt0msx.32k.4000.151               
+     0000407C  crt0msx.32k.4000.152               
+     0000407E  crt0msx.32k.4000.154               
+     0000407F  crt0msx.32k.4000.155               
+     00004082  crt0msx.32k.4000.156               
+     00004083  crt0msx.32k.4000.157               
+     00004084  crt0msx.32k.4000.158               
+     00004085  crt0msx.32k.4000.159               
+     00004087  crt0msx.32k.4000.160               
+     00004088  crt0msx.32k.4000.161               
+     00004089  crt0msx.32k.4000.162               
+     0000408A  crt0msx.32k.4000.163               
+     0000408B  crt0msx.32k.4000.164               
+     0000408C  crt0msx.32k.4000.165               
+     0000408D  crt0msx.32k.4000.166               
+     0000408E  crt0msx.32k.4000.168               
+     00004090  crt0msx.32k.4000.169               
+     00004091  crt0msx.32k.4000.170               
+     00004093  crt0msx.32k.4000.172               
+     00004096  crt0msx.32k.4000.173               
+     00004097  crt0msx.32k.4000.174               
+     00004098  _screen                            
+     00004098  vdp_tms9918.47                     
+     0000409A  vdp_tms9918.48                     
+     0000409E  vdp_tms9918.49                     
+     000040A0  vdp_tms9918.51                     
+     000040A3  vdp_tms9918.52                     
+     000040A4  vdp_tms9918.53                     
+     000040A6  vdp_tms9918.56                     
+     000040A8  vdp_tms9918.57                     
+     000040AB  vdp_tms9918.59                     
+     000040AC  vdp_tms9918.62                     
+     000040B0  vdp_tms9918.63                     
+     000040B4  vdp_tms9918.64                     
+     000040B7  vdp_tms9918.65                     
+     000040B8  vdp_tms9918.67                     
+     000040BA  vdp_tms9918.68                     
+     000040BB  _color                             
+     000040BB  vdp_tms9918.88                     
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000040BD  vdp_tms9918.89                     
+     000040C1  vdp_tms9918.90                     
+     000040C3  vdp_tms9918.92                     
+     000040C6  vdp_tms9918.93                     
+     000040C9  vdp_tms9918.95                     
+     000040CC  vdp_tms9918.96                     
+     000040CF  vdp_tms9918.97                     
+     000040D0  vdp_tms9918.99                     
+     000040D3  vdp_tms9918.100                    
+     000040D6  vdp_tms9918.102                    
+     000040D8  vdp_tms9918.103                    
+     000040DA  vdp_tms9918.104                    
+     000040DC  vdp_tms9918.105                    
+     000040DE  vdp_tms9918.106                    
+     000040DF  vdp_tms9918.108                    
+     000040E1  vdp_tms9918.109                    
+     000040E2  vdp_tms9918.110                    
+     000040E5  vdp_tms9918.112                    
+     000040E7  vdp_tms9918.113                    
+     000040E8  _vpoke                             
+     000040E8  vdp_tms9918.126                    
+     000040EA  vdp_tms9918.127                    
+     000040EE  vdp_tms9918.128                    
+     000040F0  vdp_tms9918.130                    
+     000040F3  vdp_tms9918.131                    
+     000040F6  vdp_tms9918.133                    
+     000040F9  vdp_tms9918.135                    
+     000040FC  vdp_tms9918.137                    
+     000040FE  vdp_tms9918.138                    
+     000040FF  _vpeek                             
+     000040FF  vdp_tms9918.151                    
+     00004101  vdp_tms9918.152                    
+     00004105  vdp_tms9918.153                    
+     00004107  vdp_tms9918.155                    
+     0000410A  vdp_tms9918.156                    
+     0000410D  vdp_tms9918.158                    
+     00004110  vdp_tms9918.160                    
+     00004111  vdp_tms9918.162                    
+     00004113  vdp_tms9918.163                    
+     00004114  _fillVRAM                          
+     00004114  vdp_tms9918.177                    
+     00004116  vdp_tms9918.178                    
+     0000411A  vdp_tms9918.179                    
+     0000411C  vdp_tms9918.181                    
+     0000411F  vdp_tms9918.182                    
+     00004122  vdp_tms9918.184                    
+     00004125  vdp_tms9918.185                    
+     00004128  vdp_tms9918.187                    
+     0000412B  vdp_tms9918.189                    
+     0000412E  vdp_tms9918.191                    
+     00004130  vdp_tms9918.192                    
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004131  _copyToVRAM                        
+     00004131  vdp_tms9918.207                    
+     00004133  vdp_tms9918.208                    
+     00004137  vdp_tms9918.209                    
+     00004139  vdp_tms9918.211                    
+     0000413C  vdp_tms9918.212                    
+     0000413F  vdp_tms9918.214                    
+     00004142  vdp_tms9918.215                    
+     00004145  vdp_tms9918.217                    
+     00004148  vdp_tms9918.218                    
+     0000414B  vdp_tms9918.220                    
+     0000414E  vdp_tms9918.222                    
+     00004150  vdp_tms9918.223                    
+     00004151  _copyFromVRAM                      
+     00004151  vdp_tms9918.238                    
+     00004153  vdp_tms9918.239                    
+     00004157  vdp_tms9918.240                    
+     00004159  vdp_tms9918.242                    
+     0000415C  vdp_tms9918.243                    
+     0000415F  vdp_tms9918.245                    
+     00004162  vdp_tms9918.246                    
+     00004165  vdp_tms9918.248                    
+     00004168  vdp_tms9918.249                    
+     0000416B  vdp_tms9918.251                    
+     0000416E  vdp_tms9918.253                    
+     00004170  vdp_tms9918.255                    
+     00004171  _setVDP                            
+     00004171  vdp_tms9918.268                    
+     00004173  vdp_tms9918.269                    
+     00004177  vdp_tms9918.270                    
+     00004179  vdp_tms9918.272                    
+     0000417C  vdp_tms9918.273                    
+     0000417F  vdp_tms9918.275                    
+     00004182  vdp_tms9918.277                    
+     00004184  vdp_tms9918.278                    
+     00004185  WRTVDP                             
+     00004185  vdp_tms9918.290                    
+     00004188  vdp_tms9918.291                    
+     00004189  vdp_tms9918.292                    
+     0000418B  vdp_tms9918.293                    
+     0000418C  vdp_tms9918.294                    
+     0000418D  vdp_tms9918.296                    
+     0000418E  vdp_tms9918.297                    
+     0000418F  vdp_tms9918.298                    
+     00004191  vdp_tms9918.299                    
+     00004192  vdp_tms9918.300                    
+     00004194  vdp_tms9918.301                    
+     00004196  vdp_tms9918.302                    
+     00004197  vdp_tms9918.303                    
+     00004198  WRTVRM                             
+     00004198  vdp_tms9918.315                    
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004199  vdp_tms9918.317                    
+     0000419C  vdp_tms9918.322                    
+     0000419D  vdp_tms9918.323                    
+     0000419F  vdp_tms9918.325                    
+     000041A0  vdp_tms9918.329                    
+     000041A1  vdp_tms9918.330                    
+     000041A4  vdp_tms9918.331                    
+     000041A5  vdp_tms9918.332                    
+     000041A7  vdp_tms9918.333                    
+     000041A8  vdp_tms9918.334                    
+     000041AA  vdp_tms9918.335                    
+     000041AC  vdp_tms9918.336                    
+     000041AE  vdp_tms9918.338                    
+     000041AF  vdp_tms9918.339                    
+     000041B1  vdp_tms9918.340                    
+     000041B2  vdp_tms9918.341                    
+     000041B4  vdp_tms9918.342                    
+     000041B6  vdp_tms9918.343                    
+     000041B8  vdp_tms9918.344                    
+     000041B9  vdp_tms9918.346                    
+     000041BA  RDVRM                              
+     000041BA  vdp_tms9918.357                    
+     000041BD  vdp_tms9918.361                    
+     000041BF  vdp_tms9918.363                    
+     000041C0  vdp_tms9918.367                    
+     000041C1  vdp_tms9918.368                    
+     000041C4  vdp_tms9918.369                    
+     000041C5  vdp_tms9918.370                    
+     000041C7  vdp_tms9918.371                    
+     000041C8  vdp_tms9918.372                    
+     000041CA  vdp_tms9918.373                    
+     000041CC  vdp_tms9918.374                    
+     000041CE  vdp_tms9918.376                    
+     000041CF  vdp_tms9918.377                    
+     000041D1  vdp_tms9918.378                    
+     000041D2  vdp_tms9918.379                    
+     000041D4  vdp_tms9918.380                    
+     000041D6  vdp_tms9918.381                    
+     000041D7  vdp_tms9918.383                    
+     000041D8  FILVRM                             
+     000041D8  vdp_tms9918.396                    
+     000041D9  vdp_tms9918.397                    
+     000041DB  vdp_tms9918.399                    
+     000041DE  vdp_tms9918.402                    
+     000041E0  vdp_tms9918.404                    
+     000041E1  vdp_tms9918.405                    
+     000041E2  vdp_tms9918.406                    
+     000041E3  vdp_tms9918.407                    
+     000041E5  vdp_tms9918.409                    
+     000041E6  LDIRVM                             
+     000041E6  vdp_tms9918.423                    
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004020    00003233 =       12851. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000041E7  vdp_tms9918.425                    
+     000041EA  vdp_tms9918.427                    
+     000041EB  vdp_tms9918.429                    
+     000041EC  vdp_tms9918.430                    
+     000041ED  vdp_tms9918.432                    
+     000041EF  vdp_tms9918.435                    
+     000041F1  vdp_tms9918.437                    
+     000041F2  vdp_tms9918.438                    
+     000041F3  vdp_tms9918.439                    
+     000041F4  vdp_tms9918.440                    
+     000041F6  vdp_tms9918.442                    
+     000041F7  LDIRMV                             
+     000041F7  vdp_tms9918.455                    
+     000041FA  vdp_tms9918.459                    
+     000041FB  vdp_tms9918.461                    
+     000041FC  vdp_tms9918.462                    
+     000041FD  vdp_tms9918.464                    
+     000041FF  vdp_tms9918.467                    
+     00004201  vdp_tms9918.469                    
+     00004202  vdp_tms9918.470                    
+     00004203  vdp_tms9918.471                    
+     00004204  vdp_tms9918.472                    
+     00004206  vdp_tms9918.474                    
+     00004207  _main                              splash
+     00004251  _data                              screen
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    0000001D =          29. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004010  crt0msx.32k.4000.26                
+     00004014  crt0msx.32k.4000.27                
+     00004017  crt0msx.32k.4000.28                
+     0000401A  crt0msx.32k.4000.29                
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00007253    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00007253  gsinit                             
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            00007253    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00007253  crt0msx.32k.4000.181               
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+
+Files Linked                              [ module(s) ]
+
+out/crt0msx.32k.4000.rel                  [  ]
+out/vdp_tms9918.rel                       [  ]
+out/splash.rel                            [ splash ]
+out/screen.rel                            [ screen ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+
+User Base Address Definitions
+
+_CODE = 0x4020
+_DATA = 0xc000
+
+

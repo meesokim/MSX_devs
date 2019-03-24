@@ -1,0 +1,92 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     BAKCLR  =  F3EA     |     BDRCLR  =  F3EB 
+    CALSLT  =  001C     |     CHGMOD  =  005F     |     EXPTBL  =  FCC1 
+  0 FILVRM     0140 GR  |     FORCLR  =  F3E9     |   0 LDIRMV     015F GR
+  0 LDIRVM     014E GR  |     LINL40  =  F3AE     |     MSXVER  =  002D 
+  0 RDVRM      0122 GR  |   0 READTMS    0136 R   |     RG0SAV  =  F3DF 
+  0 SET2READ   0128 R   |   0 SET2WRIT   0108 R   |     VDPSTATU=  0099 
+    VDPVRAM =  0098     |   0 VFILL_lo   0146 R   |   0 VREAD_lo   0167 R
+  0 VWRITE_l   0157 R   |   0 WRITETMS   0116 R   |   0 WRTVDP     00ED GR
+  0 WRTVRM     0100 GR  |   0 _color     0023 GR  |   0 _copyFro   00B9 GR
+  0 _copyToV   0099 GR  |   0 _fillVRA   007C GR  |   0 _screen    0000 GR
+  0 _setVDP    00D9 GR  |   0 _vpeek     0067 GR  |   0 _vpoke     0050 GR
+  0 setSCR     0014 R   |   0 vdp_tms9   003B GR  |   0 vdp_tms9   003E GR
+  0 vdp_tms9   0040 GR  |   0 vdp_tms9   0042 GR  |   0 vdp_tms9   0044 GR
+  0 vdp_tms9   0046 GR  |   0 vdp_tms9   0047 GR  |   0 vdp_tms9   0049 GR
+  0 vdp_tms9   004A GR  |   0 vdp_tms9   004D GR  |   0 vdp_tms9   004F GR
+  0 vdp_tms9   0050 GR  |   0 vdp_tms9   0052 GR  |   0 vdp_tms9   0056 GR
+  0 vdp_tms9   0058 GR  |   0 vdp_tms9   005B GR  |   0 vdp_tms9   005E GR
+  0 vdp_tms9   0061 GR  |   0 vdp_tms9   0064 GR  |   0 vdp_tms9   0066 GR
+  0 vdp_tms9   0067 GR  |   0 vdp_tms9   0069 GR  |   0 vdp_tms9   006D GR
+  0 vdp_tms9   006F GR  |   0 vdp_tms9   0072 GR  |   0 vdp_tms9   0075 GR
+  0 vdp_tms9   0078 GR  |   0 vdp_tms9   0079 GR  |   0 vdp_tms9   007B GR
+  0 vdp_tms9   007C GR  |   0 vdp_tms9   007E GR  |   0 vdp_tms9   0082 GR
+  0 vdp_tms9   0084 GR  |   0 vdp_tms9   0087 GR  |   0 vdp_tms9   008A GR
+  0 vdp_tms9   008D GR  |   0 vdp_tms9   0090 GR  |   0 vdp_tms9   0093 GR
+  0 vdp_tms9   0096 GR  |   0 vdp_tms9   0098 GR  |   0 vdp_tms9   0099 GR
+  0 vdp_tms9   009B GR  |   0 vdp_tms9   009F GR  |   0 vdp_tms9   00A1 GR
+  0 vdp_tms9   00A4 GR  |   0 vdp_tms9   00A7 GR  |   0 vdp_tms9   00AA GR
+  0 vdp_tms9   00AD GR  |   0 vdp_tms9   00B0 GR  |   0 vdp_tms9   00B3 GR
+  0 vdp_tms9   00B6 GR  |   0 vdp_tms9   00B8 GR  |   0 vdp_tms9   00B9 GR
+  0 vdp_tms9   00BB GR  |   0 vdp_tms9   00BF GR  |   0 vdp_tms9   00C1 GR
+  0 vdp_tms9   00C4 GR  |   0 vdp_tms9   00C7 GR  |   0 vdp_tms9   00CA GR
+  0 vdp_tms9   00CD GR  |   0 vdp_tms9   00D0 GR  |   0 vdp_tms9   00D3 GR
+  0 vdp_tms9   00D6 GR  |   0 vdp_tms9   00D8 GR  |   0 vdp_tms9   00D9 GR
+  0 vdp_tms9   00DB GR  |   0 vdp_tms9   00DF GR  |   0 vdp_tms9   00E1 GR
+  0 vdp_tms9   00E4 GR  |   0 vdp_tms9   00E7 GR  |   0 vdp_tms9   00EA GR
+  0 vdp_tms9   00EC GR  |   0 vdp_tms9   00ED GR  |   0 vdp_tms9   00F0 GR
+  0 vdp_tms9   00F1 GR  |   0 vdp_tms9   00F3 GR  |   0 vdp_tms9   00F4 GR
+  0 vdp_tms9   00F5 GR  |   0 vdp_tms9   00F6 GR  |   0 vdp_tms9   00F7 GR
+  0 vdp_tms9   00F9 GR  |   0 vdp_tms9   00FA GR  |   0 vdp_tms9   00FC GR
+  0 vdp_tms9   00FE GR  |   0 vdp_tms9   00FF GR  |   0 vdp_tms9   0100 GR
+  0 vdp_tms9   0101 GR  |   0 vdp_tms9   0104 GR  |   0 vdp_tms9   0105 GR
+  0 vdp_tms9   0107 GR  |   0 vdp_tms9   0108 GR  |   0 vdp_tms9   0109 GR
+  0 vdp_tms9   010C GR  |   0 vdp_tms9   010D GR  |   0 vdp_tms9   010F GR
+  0 vdp_tms9   0110 GR  |   0 vdp_tms9   0112 GR  |   0 vdp_tms9   0114 GR
+  0 vdp_tms9   0116 GR  |   0 vdp_tms9   0117 GR  |   0 vdp_tms9   0119 GR
+  0 vdp_tms9   011A GR  |   0 vdp_tms9   011C GR  |   0 vdp_tms9   011E GR
+  0 vdp_tms9   0120 GR  |   0 vdp_tms9   0121 GR  |   0 vdp_tms9   0122 GR
+  0 vdp_tms9   0125 GR  |   0 vdp_tms9   0127 GR  |   0 vdp_tms9   0128 GR
+  0 vdp_tms9   0129 GR  |   0 vdp_tms9   012C GR  |   0 vdp_tms9   012D GR
+  0 vdp_tms9   012F GR  |   0 vdp_tms9   0130 GR  |   0 vdp_tms9   0132 GR
+  0 vdp_tms9   0134 GR  |   0 vdp_tms9   0136 GR  |   0 vdp_tms9   0137 GR
+  0 vdp_tms9   0139 GR  |   0 vdp_tms9   013A GR  |   0 vdp_tms9   013C GR
+  0 vdp_tms9   013E GR  |   0 vdp_tms9   013F GR  |   0 vdp_tms9   0140 GR
+  0 vdp_tms9   0141 GR  |   0 vdp_tms9   0143 GR  |   0 vdp_tms9   0146 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 vdp_tms9   0148 GR  |   0 vdp_tms9   0149 GR  |   0 vdp_tms9   014A GR
+  0 vdp_tms9   014B GR  |   0 vdp_tms9   014D GR  |   0 vdp_tms9   014E GR
+  0 vdp_tms9   014F GR  |   0 vdp_tms9   0152 GR  |   0 vdp_tms9   0153 GR
+  0 vdp_tms9   0154 GR  |   0 vdp_tms9   0155 GR  |   0 vdp_tms9   0157 GR
+  0 vdp_tms9   0159 GR  |   0 vdp_tms9   015A GR  |   0 vdp_tms9   015B GR
+  0 vdp_tms9   015C GR  |   0 vdp_tms9   015E GR  |   0 vdp_tms9   015F GR
+  0 vdp_tms9   0162 GR  |   0 vdp_tms9   0163 GR  |   0 vdp_tms9   0164 GR
+  0 vdp_tms9   0165 GR  |   0 vdp_tms9   0167 GR  |   0 vdp_tms9   0169 GR
+  0 vdp_tms9   0000 GR  |   0 vdp_tms9   016A GR  |   0 vdp_tms9   016B GR
+  0 vdp_tms9   016C GR  |   0 vdp_tms9   016E GR  |   0 vdp_tms9   0002 GR
+  0 vdp_tms9   0006 GR  |   0 vdp_tms9   0008 GR  |   0 vdp_tms9   000B GR
+  0 vdp_tms9   000C GR  |   0 vdp_tms9   000E GR  |   0 vdp_tms9   0010 GR
+  0 vdp_tms9   0013 GR  |   0 vdp_tms9   0014 GR  |   0 vdp_tms9   0018 GR
+  0 vdp_tms9   001C GR  |   0 vdp_tms9   001F GR  |   0 vdp_tms9   0020 GR
+  0 vdp_tms9   0022 GR  |   0 vdp_tms9   0023 GR  |   0 vdp_tms9   0025 GR
+  0 vdp_tms9   0029 GR  |   0 vdp_tms9   002B GR  |   0 vdp_tms9   002E GR
+  0 vdp_tms9   0031 GR  |   0 vdp_tms9   0034 GR  |   0 vdp_tms9   0037 GR
+  0 vdp_tms9   0038 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  16F   flags    0
+   1 _DATA      size    0   flags    0
+

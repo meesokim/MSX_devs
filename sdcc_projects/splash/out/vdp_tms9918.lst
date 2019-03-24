@@ -1,0 +1,520 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ; ==============================================================================                                                                            
+                              2 ;   VDP_TMS9918_MSX.s                                                          
+                              3 ;   v1.0 (14 February 2014)                                                                     
+                              4 ;   Description:                                                              
+                              5 ;     *Opensource library for acces to VDP TMS9918
+                              6 ;     *Not use the BIOS (except the start screen mode, as it is used the 
+                              7 ;                        function CALSLT for inter-slot call).
+                              8 ;     *compatible with V9938 and V9958 (except MSX1 models: Yamaha CX5MII/128 & 
+                              9 ;        Spectravideo 738 because the detection system is based on the constant 
+                             10 ;        MSXVER (0x002D) from MSX BIOS)
+                             11 ;     *Directly using the ports 0x98 and 0x99 from MSX computers.
+                             12 ;     *Designed for develop MSX-DOS applications.                                                                           
+                             13 ; ============================================================================== 
+                             14 	.area _DATA
+                             15 
+                             16 
+                             17   .area _CODE
+                             18   
+                             19 ; Ports  
+                     0098    20 VDPVRAM   = 0x98 ;VRAM Data (Read/Write)
+                     0099    21 VDPSTATUS = 0x99 ;VDP Status Registers 
+                             22 
+                             23 
+                             24 ; BIOS calls
+                     001C    25 CALSLT = 0x001C ;Executes inter-slot call
+                     005F    26 CHGMOD = 0x005F ;Switches to given screenmode
+                             27 
+                             28 
+                             29 ;system var
+                     002D    30 MSXVER = 0x002D
+                     F3AE    31 LINL40 = 0xF3AE ;Screen width per line in SCREEN 0
+                     F3DF    32 RG0SAV = 0xF3DF ;#F3DF - #F3E6: vdp registers 0-7
+                     F3E9    33 FORCLR = 0xF3E9 ;Foreground colour
+                     F3EA    34 BAKCLR = 0xF3EA ;Background colour
+                     F3EB    35 BDRCLR = 0xF3EB ;Border colour
+                     FCC1    36 EXPTBL = 0xFCC1 
+                             37 
+                             38 
+                             39 
+                             40 ;===============================================================================
+                             41 ; screen
+                             42 ; Sets the screen mode.
+                             43 ;
+                             44 ; void screen(char mode)
+                             45 ; ==============================================================================
+   0000                      46 _screen::
+   0000 DD E5         [15]   47   push IX
+   0002 DD 21 00 00   [14]   48   ld   IX,#0
+   0006 DD 39         [15]   49   add  IX,SP
+                             50 
+   0008 DD 7E 04      [19]   51   ld   A,4(IX)
+   000B B7            [ 4]   52   or   A
+   000C 20 06         [12]   53   jr   NZ,setSCR
+                             54   
+                             55   ;screen 0 > 40 columns mode
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+   000E 3E 27         [ 7]   56   ld   A,#39  ;default value
+   0010 32 AE F3      [13]   57   ld   (#LINL40),A 
+                             58   
+   0013 AF            [ 4]   59   xor  A
+                             60   
+   0014                      61 setSCR:  
+   0014 DD 21 5F 00   [14]   62   ld   IX,#CHGMOD
+   0018 FD 2A C0 FC   [20]   63   ld   IY,(EXPTBL-1)
+   001C CD 1C 00      [17]   64   call CALSLT ;acces to MSX BIOS
+   001F FB            [ 4]   65   ei
+                             66   
+   0020 DD E1         [14]   67   pop ix
+   0022 C9            [10]   68   ret
+                             69   
+                             70 
+                             71 
+                             72 ;===============================================================================
+                             73 ; color
+                             74 ; Function : Specifies the foreground color, background and area of the edges. 
+                             75 ; Input    : (char) - ink color
+                             76 ;            (char) - background color.        <<<< Not used. BIOS version only.
+                             77 ;            (char) - border color
+                             78 ;
+                             79 ; void color(char ink, char background, char border)
+                             80 ;===============================================================================
+                             81 ;(info by Portar Doc)
+                             82 ;Register 7: colour register.
+                             83 ;  Bit  Name  Expl.
+                             84 ;  0-3  TC0-3 Background colour in SCREEN 0 (also border colour in SCREEN 1-3)
+                             85 ;  4-7  BD0-3 Foreground colour in SCREEN 0      
+                             86 ;===============================================================================
+   0023                      87 _color::
+   0023 DD E5         [15]   88   push IX
+   0025 DD 21 00 00   [14]   89   ld   IX,#0
+   0029 DD 39         [15]   90   add  IX,SP
+                             91 
+   002B DD 7E 05      [19]   92   ld   A,5(IX)
+   002E 32 EA F3      [13]   93   ld   (BAKCLR),A ;save in system vars
+                             94   
+   0031 DD 7E 06      [19]   95   ld   A,6(IX)
+   0034 32 EB F3      [13]   96   ld   (BDRCLR),A
+   0037 47            [ 4]   97   ld   B,A
+                             98   
+   0038 DD 7E 04      [19]   99   ld   A,4(IX)
+   003B 32 E9 F3      [13]  100   ld   (FORCLR),A ;save in system vars  
+                            101 
+   003E CB 27         [ 8]  102   sla  A
+   0040 CB 27         [ 8]  103   sla  A
+   0042 CB 27         [ 8]  104   sla  A
+   0044 CB 27         [ 8]  105   sla  A
+   0046 80            [ 4]  106   add  A,B
+                            107   
+   0047 0E 07         [ 7]  108   ld   C,#0x07 ;VDP reg 7
+   0049 47            [ 4]  109   ld   B,A  
+   004A CD ED 00      [17]  110   call WRTVDP
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                            111    
+   004D DD E1         [14]  112   pop  IX
+   004F C9            [10]  113   ret
+                            114 
+                            115 
+                            116 
+                            117 ;===============================================================================
+                            118 ; vpoke
+                            119 ; Function : Writes a byte to the video RAM. 
+                            120 ; Input    : (uint)  - VRAM address
+                            121 ;            (byte)  - value 
+                            122 ;
+                            123 ;void vpoke(uint address, byte value)
+                            124 ;===============================================================================
+   0050                     125 _vpoke::
+   0050 DD E5         [15]  126   push IX
+   0052 DD 21 00 00   [14]  127   ld   IX,#0
+   0056 DD 39         [15]  128   add  IX,SP
+                            129   
+   0058 DD 6E 04      [19]  130   ld   L,4(IX)
+   005B DD 66 05      [19]  131   ld   H,5(IX)
+                            132    
+   005E DD 7E 06      [19]  133   ld   A,6(IX)
+                            134   
+   0061 CD 00 01      [17]  135   call WRTVRM
+                            136   
+   0064 DD E1         [14]  137   pop  IX
+   0066 C9            [10]  138   ret
+                            139 
+                            140 
+                            141 
+                            142 ;===============================================================================
+                            143 ; vpeek
+                            144 ; Function : Reads data from the video RAM. 
+                            145 ; Input    : (unsigned int) - memory address
+                            146 ; Output   : (byte) value
+                            147 ;
+                            148 ; unsigned char vpeek(uint address)
+                            149 ;=============================================================================== 
+   0067                     150 _vpeek::
+   0067 DD E5         [15]  151   push IX
+   0069 DD 21 00 00   [14]  152   ld   IX,#0
+   006D DD 39         [15]  153   add  IX,SP
+                            154   
+   006F DD 6E 04      [19]  155   ld   L,4(IX)
+   0072 DD 66 05      [19]  156   ld   H,5(IX) 
+                            157    
+   0075 CD 22 01      [17]  158   call RDVRM
+                            159   
+   0078 6F            [ 4]  160   ld   L,A
+                            161   
+   0079 DD E1         [14]  162   pop  IX
+   007B C9            [10]  163   ret
+                            164 
+                            165 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                            166 
+                            167 ;===============================================================================
+                            168 ; fillVRAM                                
+                            169 ; Function : Fill a large area of the VRAM of the same byte.
+                            170 ; Input    : (unsigned int) - VRAM address
+                            171 ;            (unsigned int) - length
+                            172 ;            (byte) - value
+                            173 ;
+                            174 ; void fillVRAM (uint vaddress, uint size, byte value)
+                            175 ;===============================================================================
+   007C                     176 _fillVRAM::
+   007C DD E5         [15]  177   push IX
+   007E DD 21 00 00   [14]  178   ld   IX,#0
+   0082 DD 39         [15]  179   add  IX,SP
+                            180       
+   0084 DD 6E 04      [19]  181   ld   L,4(IX) ; vaddress
+   0087 DD 66 05      [19]  182   ld   H,5(IX)
+                            183     
+   008A DD 5E 06      [19]  184   ld   E,6(IX) ;length
+   008D DD 56 07      [19]  185   ld   D,7(IX)
+                            186     
+   0090 DD 7E 08      [19]  187   ld   A,8(IX) ;value
+                            188   
+   0093 CD 40 01      [17]  189   call FILVRM
+                            190     
+   0096 DD E1         [14]  191   pop  IX
+   0098 C9            [10]  192   ret
+                            193 
+                            194 
+                            195 
+                            196 ;===============================================================================
+                            197 ; copyToVRAM
+                            198 ; Function : Block transfer from memory to VRAM
+                            199 ; Input    : (unsigned int) - source RAM address 
+                            200 ;            (unsigned int) - target VRAM address
+                            201 ;            (unsigned int) - length
+                            202 ;
+                            203 ; void copyToVRAM(uint address, uint vaddress, uint length)
+                            204 ;===============================================================================
+   0099                     205 _copyToVRAM::
+                            206 
+   0099 DD E5         [15]  207   push IX
+   009B DD 21 00 00   [14]  208   ld   IX,#0
+   009F DD 39         [15]  209   add  IX,SP  
+                            210 
+   00A1 DD 6E 04      [19]  211   ld   L,4(IX) ;ram address 
+   00A4 DD 66 05      [19]  212   ld   H,5(IX)
+                            213       
+   00A7 DD 5E 06      [19]  214   ld   E,6(IX) ;vaddress
+   00AA DD 56 07      [19]  215   ld   D,7(IX)
+                            216   
+   00AD DD 4E 08      [19]  217   ld   C,8(IX) ;length
+   00B0 DD 46 09      [19]  218   ld   B,9(IX)
+                            219   
+   00B3 CD 4E 01      [17]  220   call LDIRVM
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                            221   
+   00B6 DD E1         [14]  222   pop  IX
+   00B8 C9            [10]  223   ret
+                            224 
+                            225 
+                            226 
+                            227 ;===============================================================================
+                            228 ; copyFromVRAM
+                            229 ; Function : Block transfer from VRAM to memory.
+                            230 ; Input    : (unsigned int) - source VRAM address
+                            231 ;            (unsigned int) - target RAM address
+                            232 ;            (unsigned int) - length
+                            233 ;
+                            234 ;void copyFromVRAM(uint vaddress, uint address, uint length)
+                            235 ;===============================================================================
+   00B9                     236 _copyFromVRAM::
+                            237 
+   00B9 DD E5         [15]  238   push IX
+   00BB DD 21 00 00   [14]  239   ld   IX,#0
+   00BF DD 39         [15]  240   add  IX,SP
+                            241     
+   00C1 DD 6E 04      [19]  242   ld   L,4(IX) ;vaddress
+   00C4 DD 66 05      [19]  243   ld   H,5(IX)
+                            244   
+   00C7 DD 5E 06      [19]  245   ld   E,6(IX) ;ram address 
+   00CA DD 56 07      [19]  246   ld   D,7(IX)     
+                            247   
+   00CD DD 4E 08      [19]  248   ld   C,8(IX) ;length
+   00D0 DD 46 09      [19]  249   ld   B,9(IX)
+                            250     
+   00D3 CD 5F 01      [17]  251   call LDIRMV
+                            252     
+   00D6 DD E1         [14]  253   pop  IX
+                            254 
+   00D8 C9            [10]  255   ret
+                            256   
+                            257 
+                            258 
+                            259 ;===============================================================================
+                            260 ; _setVDP
+                            261 ; Function : writes a value in VDP reg.
+                            262 ; Input    : (byte) - VDP reg
+                            263 ;            (byte) - value
+                            264 ;
+                            265 ;void setVDP(byte, byte)
+                            266 ;===============================================================================
+   00D9                     267 _setVDP::
+   00D9 DD E5         [15]  268   push IX
+   00DB DD 21 00 00   [14]  269   ld   IX,#0
+   00DF DD 39         [15]  270   add  IX,SP
+                            271       
+   00E1 DD 4E 04      [19]  272   ld   C,4(IX) ;reg
+   00E4 DD 46 05      [19]  273   ld   B,5(IX) ;value
+                            274   
+   00E7 CD ED 00      [17]  275   call WRTVDP  
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                            276     
+   00EA DD E1         [14]  277   pop  IX
+   00EC C9            [10]  278   ret
+                            279 
+                            280   
+                            281   
+                            282 ;===============================================================================
+                            283 ; WRTVDP
+                            284 ; write data in the VDP-register  
+                            285 ; Input    : B  - data to write
+                            286 ;            C  - number of the register
+                            287 ;===============================================================================
+   00ED                     288 WRTVDP::
+                            289 
+   00ED 21 DF F3      [10]  290   ld   HL,#RG0SAV
+   00F0 59            [ 4]  291   ld   E,C
+   00F1 16 00         [ 7]  292   ld   D,#0
+   00F3 19            [11]  293   add  HL,DE
+   00F4 70            [ 7]  294   ld   (HL),B ;save copy of vdp value in system var
+                            295   
+   00F5 78            [ 4]  296   ld   A,B
+   00F6 F3            [ 4]  297   di
+   00F7 D3 99         [11]  298 	out	 (#VDPSTATUS),A
+   00F9 79            [ 4]  299 	ld   A,C
+   00FA F6 80         [ 7]  300   or   #0x80            ;add  A,#0x80 ;add 128 to VDP reg value
+   00FC D3 99         [11]  301   out	 (#VDPSTATUS),A
+   00FE FB            [ 4]  302   ei
+   00FF C9            [10]  303   ret
+                            304 
+                            305 
+                            306   
+                            307 ;===============================================================================
+                            308 ; WRTVRM                                
+                            309 ; Function : 
+                            310 ; Input    : A  - value
+                            311 ;            HL - VRAM address
+                            312 ;===============================================================================
+   0100                     313 WRTVRM::
+                            314   
+   0100 F5            [11]  315   push   AF
+                            316   
+   0101 CD 08 01      [17]  317   call SET2WRITE  
+                            318 
+                            319   ;ex (SP),HL
+                            320   ;ex (SP),HL
+                            321   
+   0104 F1            [10]  322   pop   AF
+   0105 D3 98         [11]  323   out  (VDPVRAM),A
+                            324   
+   0107 C9            [10]  325   ret
+                            326 
+                            327 
+   0108                     328 SET2WRITE:
+   0108 F3            [ 4]  329   di
+   0109 3A 2D 00      [13]  330   ld   A,(#MSXVER) ;if MSX2?
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+   010C B7            [ 4]  331   or   A
+   010D 28 07         [12]  332   jr   Z,WRITETMS
+   010F AF            [ 4]  333   xor  A
+   0110 D3 99         [11]  334   out  (VDPSTATUS),A
+   0112 3E 8E         [ 7]  335   ld   A,#0x8E
+   0114 D3 99         [11]  336   out  (VDPSTATUS),A
+   0116                     337 WRITETMS:
+   0116 7D            [ 4]  338   ld   A,L
+   0117 D3 99         [11]  339   out  (VDPSTATUS),A
+   0119 7C            [ 4]  340   ld   A,H        
+   011A E6 3F         [ 7]  341   and  #0x3F
+   011C F6 40         [ 7]  342   or   #0x40
+   011E D3 99         [11]  343   out  (VDPSTATUS),A
+   0120 FB            [ 4]  344   ei
+                            345   
+   0121 C9            [10]  346   ret
+                            347 
+                            348 
+                            349 
+                            350 ;===============================================================================
+                            351 ; RDVRM                                
+                            352 ; Function : 
+                            353 ; Input    : HL - VRAM address
+                            354 ; Output   : A  - value
+                            355 ;===============================================================================
+   0122                     356 RDVRM::
+   0122 CD 28 01      [17]  357   call SET2READ
+                            358   ;ex (SP),HL
+                            359   ;ex (SP),HL
+                            360     
+   0125 DB 98         [11]  361   in   A,(VDPVRAM)
+                            362 
+   0127 C9            [10]  363   ret
+                            364   
+                            365   
+   0128                     366 SET2READ:
+   0128 F3            [ 4]  367   di
+   0129 3A 2D 00      [13]  368   ld A,(#MSXVER) ;if MSX2?
+   012C B7            [ 4]  369   or A
+   012D 28 07         [12]  370   jr Z,READTMS
+   012F AF            [ 4]  371   xor A
+   0130 D3 99         [11]  372   out  (VDPSTATUS),A
+   0132 3E 8E         [ 7]  373   ld   A,#0x8E
+   0134 D3 99         [11]  374   out  (VDPSTATUS),A
+   0136                     375 READTMS:
+   0136 7D            [ 4]  376   ld   A,L
+   0137 D3 99         [11]  377   out  (VDPSTATUS),A
+   0139 7C            [ 4]  378   ld   A,H
+   013A E6 3F         [ 7]  379   and  #0x3F
+   013C D3 99         [11]  380   out  (VDPSTATUS),A 
+   013E FB            [ 4]  381   ei
+                            382 
+   013F C9            [10]  383   ret
+                            384 
+                            385 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                            386 
+                            387 ;===============================================================================
+                            388 ; FILVRM                                
+                            389 ; Function : Fill a large area of the VRAM of the same byte.
+                            390 ; Input    : A  - value
+                            391 ;            DE - Size
+                            392 ;            HL - VRAM address
+                            393 ;===============================================================================
+   0140                     394 FILVRM::
+                            395   
+   0140 47            [ 4]  396   ld   B,A
+   0141 0E 98         [ 7]  397   ld   C,#VDPVRAM
+                            398    
+   0143 CD 08 01      [17]  399   call SET2WRITE  
+                            400     
+   0146                     401 VFILL_loop:
+   0146 ED 41         [12]  402   out  (C),B 
+                            403   
+   0148 1B            [ 6]  404   dec  DE
+   0149 7A            [ 4]  405   ld   A,D
+   014A B3            [ 4]  406   or   E
+   014B 20 F9         [12]  407   jr   nz,VFILL_loop 
+                            408   
+   014D C9            [10]  409   ret
+                            410 
+                            411 
+                            412 
+                            413 ;===============================================================================
+                            414 ; LDIRVM
+                            415 ; Function : 
+                            416 ;    Block transfer from memory to VRAM 
+                            417 ; Input    : BC - blocklength
+                            418 ;            HL - source RAM address
+                            419 ;            DE - target VRAM address
+                            420 ;===============================================================================
+   014E                     421 LDIRVM::
+                            422 
+   014E EB            [ 4]  423   ex   DE,HL
+                            424   
+   014F CD 08 01      [17]  425   call SET2WRITE
+                            426     
+   0152 EB            [ 4]  427   ex   DE,HL
+                            428   
+   0153 50            [ 4]  429   ld   D,B
+   0154 59            [ 4]  430   ld   E,C
+                            431         
+   0155 0E 98         [ 7]  432   ld   C,#VDPVRAM
+                            433     
+   0157                     434 VWRITE_loop:
+   0157 ED A3         [16]  435   outi
+                            436   
+   0159 1B            [ 6]  437   dec  DE
+   015A 7A            [ 4]  438   ld   A,D
+   015B B3            [ 4]  439   or   E
+   015C 20 F9         [12]  440   jr   nz,VWRITE_loop    
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+                            441   
+   015E C9            [10]  442   ret   
+                            443     
+                            444 
+                            445         
+                            446 ;===============================================================================
+                            447 ; LDIRMV
+                            448 ; Function : 
+                            449 ;    Block transfer from VRAM to memory.  
+                            450 ; Input    : BC - blocklength
+                            451 ;            HL - source VRAM address                     
+                            452 ;            DE - target RAM address            
+                            453 ;===============================================================================    
+   015F                     454 LDIRMV::
+   015F CD 28 01      [17]  455   call SET2READ
+                            456 ;  ex (SP),HL
+                            457 ;  ex (SP),HL
+                            458   
+   0162 EB            [ 4]  459   ex   DE,HL
+                            460   
+   0163 50            [ 4]  461   ld   D,B
+   0164 59            [ 4]  462   ld   E,C
+                            463   
+   0165 0E 98         [ 7]  464   ld   C,#VDPVRAM
+                            465     
+   0167                     466 VREAD_loop:
+   0167 ED A2         [16]  467   ini
+                            468   
+   0169 1B            [ 6]  469   dec  DE
+   016A 7A            [ 4]  470   ld   A,D
+   016B B3            [ 4]  471   or   E
+   016C 20 F9         [12]  472   jr   NZ,VREAD_loop    
+                            473    
+   016E C9            [10]  474   ret
+                            475   

@@ -1,0 +1,51 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 __initrl   0023 GR  |   0 _getchar   001C GR
+  0 _getchar   0023 GR  |   0 _getchar   001C GR  |     _main      **** GX
+  0 _putchar   0000 GR  |   0 _putchar   001C GR  |   0 _putchar   0000 GR
+  0 crt0msx.   0032 GR  |   0 crt0msx.   0035 GR  |   0 crt0msx.   0038 GR
+  0 crt0msx.   0039 GR  |   0 crt0msx.   003A GR  |   0 crt0msx.   003D GR
+  0 crt0msx.   003E GR  |   0 crt0msx.   003F GR  |   0 crt0msx.   0040 GR
+  0 crt0msx.   0041 GR  |   0 crt0msx.   0042 GR  |   0 crt0msx.   0045 GR
+  0 crt0msx.   0048 GR  |   0 crt0msx.   0049 GR  |   0 crt0msx.   004A GR
+  0 crt0msx.   004D GR  |   0 crt0msx.   004E GR  |   0 crt0msx.   004F GR
+  0 crt0msx.   0050 GR  |   0 crt0msx.   0051 GR  |   0 crt0msx.   0052 GR
+  0 crt0msx.   0054 GR  |   0 crt0msx.   0055 GR  |   0 crt0msx.   0056 GR
+  0 crt0msx.   0057 GR  |   0 crt0msx.   005A GR  |   0 crt0msx.   005B GR
+  0 crt0msx.   005C GR  |   0 crt0msx.   005E GR  |   0 crt0msx.   005F GR
+  0 crt0msx.   0062 GR  |   0 crt0msx.   0063 GR  |   0 crt0msx.   0064 GR
+  0 crt0msx.   0065 GR  |   0 crt0msx.   0067 GR  |   0 crt0msx.   0068 GR
+  0 crt0msx.   0069 GR  |   0 crt0msx.   006A GR  |   0 crt0msx.   006B GR
+  0 crt0msx.   006C GR  |   0 crt0msx.   006D GR  |   0 crt0msx.   006E GR
+  0 crt0msx.   0070 GR  |   0 crt0msx.   0071 GR  |   0 crt0msx.   0073 GR
+  0 crt0msx.   0076 GR  |   0 crt0msx.   0077 GR  |   4 crt0msx.   0000 GR
+  2 crt0msx.   4010 GR  |   2 crt0msx.   4014 GR  |   2 crt0msx.   4017 GR
+  2 crt0msx.   401A GR  |   0 crt0msx.   0000 GR  |   0 crt0msx.   0002 GR
+  0 crt0msx.   0006 GR  |   0 crt0msx.   0008 GR  |   0 crt0msx.   000B GR
+  0 crt0msx.   000D GR  |   0 crt0msx.   000F GR  |   0 crt0msx.   0011 GR
+  0 crt0msx.   0014 GR  |   0 crt0msx.   0016 GR  |   0 crt0msx.   0019 GR
+  0 crt0msx.   001B GR  |   0 crt0msx.   001C GR  |   0 crt0msx.   001F GR
+  0 crt0msx.   0021 GR  |   0 crt0msx.   0022 GR  |   0 crt0msx.   0023 GR
+  0 crt0msx.   0024 GR  |   0 crt0msx.   0025 GR  |   0 crt0msx.   0026 GR
+  0 crt0msx.   0027 GR  |   0 crt0msx.   0028 GR  |   0 crt0msx.   002A GR
+  0 crt0msx.   002D GR  |   0 crt0msx.   002E GR  |   0 crt0msx.   002F GR
+  0 crt0msx.   0030 GR  |   0 crt0msx.   0031 GR  |   0 find_rom   004A GR
+  3 gsinit     0000 GR  |   2 init       4010 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   78   flags    0
+   1 _HEADER    size    0   flags    8
+   2 _HEADER0   size   1D   flags    8
+   3 _GSINIT    size    0   flags    0
+   4 _GSFINAL   size    1   flags    0
+   5 _DATA      size    0   flags    0
+   6 _BSS       size    0   flags    0
+

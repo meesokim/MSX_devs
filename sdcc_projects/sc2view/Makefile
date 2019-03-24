@@ -12,7 +12,7 @@ LIBDIR = libs
 SRCDIR = src
 FILENAME = sc2view
 
-CRT0 = crt0msx_msxdos_advanced.s
+CRT0 ?= crt0msx_msxdos_advanced.s
 ADDR_CODE = 0x178
 ADDR_DATA = 0
 

@@ -1,0 +1,15 @@
+-mjwx
+-i sc2view.ihx
+-b _CODE = 0x0178
+-b _DATA = 0x0000
+-k /usr/bin/../share/sdcc/lib/z80
+-k /usr/share/sdcc/lib/z80
+-l z80
+sc2view.rel
+out/crt0msx.16k.4000.rel
+out/conio.rel
+out/msxdos.rel
+out/vdp_tms9918.rel
+out/heap.rel
+
+-e

@@ -1,0 +1,12 @@
+-mjwx
+-i main.ihx
+-b _CODE = 0x4020
+-b _DATA = 0xc000
+-k C:\Program Files\SDCC\bin\..\lib\z80
+-l z80
+out/crt0msx.32k.4000.rel
+out/vdp_tms9918.rel
+out/splash.rel
+out/screen.rel
+
+-e

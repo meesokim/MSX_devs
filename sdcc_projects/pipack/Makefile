@@ -3,12 +3,13 @@ ASM = sdasz80
 PLATFORM = -mz80
 EMULATOR = openmsx -carta
 HEXBIN = makebin -s 65536
+BIN2C = xxd -i
 
 STARTUPDIR = startups
 INCLUDEDIR = includes
 LIBDIR = libs
 SRCDIR = src
-TITLE = splash
+TITLE = pipack
 
 ROMSIZE ?= 32k
 
@@ -27,27 +28,32 @@ CCFLAGS = $(VERBOSE) $(PLATFORM) --code-loc $(ADDR_CODE) --data-loc $(ADDR_DATA)
 			--no-std-crt0 --out-fmt-ihx --opt-code-size
 LDFLAGS = $(VERBOSE) $(PLATFORM) --code-loc $(ADDR_CODE) --data-loc $(ADDR_DATA) \
 			--no-std-crt0 --out-fmt-ihx --opt-code-size			
-SOURCES1 = $(TITLE).c screen.c
+SOURCES1 = $(TITLE).c
 SOURCES2 = $(CRT0) vdp_tms9918.s 
+SOURCES3 = msx.alf
 OBJECTS1 = $(SOURCES1:%.c=out/%.rel)
 OBJECTS2 = $(SOURCES2:%.s=out/%.rel)
+OBJECTS3 = $(SOURCES3:%.alf=out/%.rel)
+
 
 OUTFILE = test.rom
 .PHONY: all compile build clean emulator
 
 all: compile build
 
-compile: $(SOURCES2) $(SOURCES1)
-	@echo "Linking ... " $(OBJECTS2) $(OBJECTS1)
+compile: $(SOURCES2) $(SOURCES1) $(SOURCES3)
+	@echo "Linking ... " $(OBJECTS2) $(OBJECTS1) $(OBJECTS3)
 	
 build: main.ihx 
 	@echo "Building $(OUTFILE)..."
 	@$(HEXBIN) main.ihx $(OUTFILE).tmp
 	@dd skip=16384 count=$(ROMSIZE) if=$(OUTFILE).tmp of=$(OUTFILE) bs=1 status=none
 	@rm $(OUTFILE).tmp
+	@bin2c $(OUTFILE) > $(TITLE).data
 	@echo "Done."
-	
-main.ihx: $(OBJECTS2) $(OBJECTS1)
+#yazd --addr:0x4000 -lst $(OUTFILE) > $(TITLE).lst	
+
+main.ihx: $(OBJECTS2) $(OBJECTS1) $(OBJECTS3)
 	@$(CC) $^ $(LDFLAGS) -o $@
 
 clean:
@@ -70,6 +76,13 @@ emulator: $(OUTFILE)
 	$(DIR_GUARD)
 	@[ -f $(LIBDIR)/$@ ] && $(CC) $(VERBOSE) $(PLATFORM) -I$(INCLUDEDIR) -c -o $(ODIR)/$(notdir $(@:.c=.rel)) $(LIBDIR)/$@ || true
 	@[ -f $(SRCDIR)/$@ ] && $(CC) $(VERBOSE) $(PLATFORM) -I$(INCLUDEDIR) -c -o $(ODIR)/$(notdir $(@:.c=.rel)) $(SRCDIR)/$@ || true 
+	
+%.alf:
+	@echo "Converting $@"
+	@$(BIN2C) $(SRCDIR)/$@ > $(SRCDIR)/$@.c
+	@sed -i s/unsigned/const\ unsigned/ -i $(SRCDIR)/$@.c
+	@[ -f $(SRCDIR)/$@.c ] &&  $(CC) $(VERBOSE) $(PLATFORM) -I$(INCLUDEDIR) -c -o $(ODIR)/$(notdir $(@:.alf=.rel)) $(SRCDIR)/$@.c || true 
+	
 		
 #%.rel: %.s
 #	@echo "Compiling ..$@"

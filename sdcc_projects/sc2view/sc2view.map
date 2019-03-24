@@ -1,0 +1,427 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  _heap_top                       
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSINIT                       
+     00000000  l__HEADER                       
+     00000000  l__HOME                         
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000001  l__GSFINAL                      
+     00000001  l__INITIALIZED                  
+     00000001  l__INITIALIZER                  
+     00000012  l__DATA                         
+     0000001A  l__HEADER0                      
+     00000178  s__CODE                         
+     0000095C  l__CODE                         
+     00000AD4  s__DATA                         
+     00000AE6  s__INITIALIZED                  
+     00000AE7  s__GSFINAL                      
+     00000AE7  s__GSINIT                       
+     00000AE7  s__HOME                         
+     00000AE8  s__INITIALIZER                  
+     00000AE9  s__BSS                          
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000178    0000095C =        2396. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000178  _main                              sc2view
+     0000037C  _putchar_start                     
+     00000398  _getchar_start                     
+     00000398  _putchar_end                       
+     0000039F  __initrleblock                     
+     0000039F  _getchar_end                       
+     000003C6  _getch                             conio
+     000003C6  _getchar                           conio
+     000003CC  _putch                             conio
+     000003CC  _putchar                           conio
+     000003D7  _cputs                             conio
+     000003E9  _cgets                             conio
+     0000040F  _getche                            conio
+     0000041D  _kbhit                             conio
+     00000423  _clrscr                            conio
+     0000042E  _clreol                            conio
+     0000043A  _delline                           conio
+     00000446  _insline                           conio
+     00000452  _gotoxy                            conio
+     00000478  _wherex                            conio
+     0000047F  _wherey                            conio
+     00000486  _setcursortype                     conio
+     000004D4  _cprintf                           conio
+     0000066D  _puthex                            conio
+     000006B1  _puthex8                           conio
+     000006C3  _puthex16                          conio
+     000006D2  _putdec                            conio
+     00000729  _putdec8                           conio
+     0000073B  _putdec16                          conio
+     0000074A  __dosVer                           msxdos
+     00000781  _getDOSType                        msxdos
+     000007A0  _getDOSVersion                     msxdos
+     000007C5  _getLastDOSError                   msxdos
+     000007CD  _open                              msxdos
+     000007F4  _creat                             msxdos
+     0000081E  _close                             msxdos
+     00000835  _dup                               msxdos
+     00000856  _read                              msxdos
+     00000881  _write                             msxdos
+     00000885  _lseek                             msxdos
+     0000088C  _exit                              msxdos
+     0000089F  _screen                            
+     0000089F  vdp_tms9918s9918.47                
+     000008A1  vdp_tms9918s9918.48                
+     000008A5  vdp_tms9918s9918.49                
+     000008A7  vdp_tms9918s9918.51                
+     000008AA  vdp_tms9918s9918.52                
+     000008AB  vdp_tms9918s9918.53                
+     000008AD  vdp_tms9918s9918.56                
+     000008AF  vdp_tms9918s9918.57                
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000178    0000095C =        2396. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000008B2  vdp_tms9918s9918.59                
+     000008B3  vdp_tms9918s9918.62                
+     000008B7  vdp_tms9918s9918.63                
+     000008BB  vdp_tms9918s9918.64                
+     000008BE  vdp_tms9918s9918.65                
+     000008BF  vdp_tms9918s9918.67                
+     000008C1  vdp_tms9918s9918.68                
+     000008C2  _color                             
+     000008C2  vdp_tms9918s9918.88                
+     000008C4  vdp_tms9918s9918.89                
+     000008C8  vdp_tms9918s9918.90                
+     000008CA  vdp_tms9918s9918.92                
+     000008CD  vdp_tms9918s9918.93                
+     000008D0  vdp_tms9918s9918.95                
+     000008D3  vdp_tms9918s9918.96                
+     000008D6  vdp_tms9918s9918.97                
+     000008D7  vdp_tms9918s9918.99                
+     000008DA  vdp_tms9918s9918.100               
+     000008DD  vdp_tms9918s9918.102               
+     000008DF  vdp_tms9918s9918.103               
+     000008E1  vdp_tms9918s9918.104               
+     000008E3  vdp_tms9918s9918.105               
+     000008E5  vdp_tms9918s9918.106               
+     000008E6  vdp_tms9918s9918.108               
+     000008E8  vdp_tms9918s9918.109               
+     000008E9  vdp_tms9918s9918.110               
+     000008EC  vdp_tms9918s9918.112               
+     000008EE  vdp_tms9918s9918.113               
+     000008EF  _vpoke                             
+     000008EF  vdp_tms9918s9918.126               
+     000008F1  vdp_tms9918s9918.127               
+     000008F5  vdp_tms9918s9918.128               
+     000008F7  vdp_tms9918s9918.130               
+     000008FA  vdp_tms9918s9918.131               
+     000008FD  vdp_tms9918s9918.133               
+     00000900  vdp_tms9918s9918.135               
+     00000903  vdp_tms9918s9918.137               
+     00000905  vdp_tms9918s9918.138               
+     00000906  _vpeek                             
+     00000906  vdp_tms9918s9918.151               
+     00000908  vdp_tms9918s9918.152               
+     0000090C  vdp_tms9918s9918.153               
+     0000090E  vdp_tms9918s9918.155               
+     00000911  vdp_tms9918s9918.156               
+     00000914  vdp_tms9918s9918.158               
+     00000917  vdp_tms9918s9918.160               
+     00000918  vdp_tms9918s9918.162               
+     0000091A  vdp_tms9918s9918.163               
+     0000091B  _fillVRAM                          
+     0000091B  vdp_tms9918s9918.177               
+     0000091D  vdp_tms9918s9918.178               
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000178    0000095C =        2396. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000921  vdp_tms9918s9918.179               
+     00000923  vdp_tms9918s9918.181               
+     00000926  vdp_tms9918s9918.182               
+     00000929  vdp_tms9918s9918.184               
+     0000092C  vdp_tms9918s9918.185               
+     0000092F  vdp_tms9918s9918.187               
+     00000932  vdp_tms9918s9918.189               
+     00000935  vdp_tms9918s9918.191               
+     00000937  vdp_tms9918s9918.192               
+     00000938  _copyToVRAM                        
+     00000938  vdp_tms9918s9918.207               
+     0000093A  vdp_tms9918s9918.208               
+     0000093E  vdp_tms9918s9918.209               
+     00000940  vdp_tms9918s9918.211               
+     00000943  vdp_tms9918s9918.212               
+     00000946  vdp_tms9918s9918.214               
+     00000949  vdp_tms9918s9918.215               
+     0000094C  vdp_tms9918s9918.217               
+     0000094F  vdp_tms9918s9918.218               
+     00000952  vdp_tms9918s9918.220               
+     00000955  vdp_tms9918s9918.222               
+     00000957  vdp_tms9918s9918.223               
+     00000958  _copyFromVRAM                      
+     00000958  vdp_tms9918s9918.238               
+     0000095A  vdp_tms9918s9918.239               
+     0000095E  vdp_tms9918s9918.240               
+     00000960  vdp_tms9918s9918.242               
+     00000963  vdp_tms9918s9918.243               
+     00000966  vdp_tms9918s9918.245               
+     00000969  vdp_tms9918s9918.246               
+     0000096C  vdp_tms9918s9918.248               
+     0000096F  vdp_tms9918s9918.249               
+     00000972  vdp_tms9918s9918.251               
+     00000975  vdp_tms9918s9918.253               
+     00000977  vdp_tms9918s9918.255               
+     00000978  _setVDP                            
+     00000978  vdp_tms9918s9918.268               
+     0000097A  vdp_tms9918s9918.269               
+     0000097E  vdp_tms9918s9918.270               
+     00000980  vdp_tms9918s9918.272               
+     00000983  vdp_tms9918s9918.273               
+     00000986  vdp_tms9918s9918.275               
+     00000989  vdp_tms9918s9918.277               
+     0000098B  vdp_tms9918s9918.278               
+     0000098C  WRTVDP                             
+     0000098C  vdp_tms9918s9918.290               
+     0000098F  vdp_tms9918s9918.291               
+     00000990  vdp_tms9918s9918.292               
+     00000992  vdp_tms9918s9918.293               
+     00000993  vdp_tms9918s9918.294               
+     00000994  vdp_tms9918s9918.296               
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000178    0000095C =        2396. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000995  vdp_tms9918s9918.297               
+     00000996  vdp_tms9918s9918.298               
+     00000998  vdp_tms9918s9918.299               
+     00000999  vdp_tms9918s9918.300               
+     0000099B  vdp_tms9918s9918.301               
+     0000099D  vdp_tms9918s9918.302               
+     0000099E  vdp_tms9918s9918.303               
+     0000099F  WRTVRM                             
+     0000099F  vdp_tms9918s9918.315               
+     000009A0  vdp_tms9918s9918.317               
+     000009A3  vdp_tms9918s9918.322               
+     000009A4  vdp_tms9918s9918.323               
+     000009A6  vdp_tms9918s9918.325               
+     000009A7  vdp_tms9918s9918.329               
+     000009A8  vdp_tms9918s9918.330               
+     000009AB  vdp_tms9918s9918.331               
+     000009AC  vdp_tms9918s9918.332               
+     000009AE  vdp_tms9918s9918.333               
+     000009AF  vdp_tms9918s9918.334               
+     000009B1  vdp_tms9918s9918.335               
+     000009B3  vdp_tms9918s9918.336               
+     000009B5  vdp_tms9918s9918.338               
+     000009B6  vdp_tms9918s9918.339               
+     000009B8  vdp_tms9918s9918.340               
+     000009B9  vdp_tms9918s9918.341               
+     000009BB  vdp_tms9918s9918.342               
+     000009BD  vdp_tms9918s9918.343               
+     000009BF  vdp_tms9918s9918.344               
+     000009C0  vdp_tms9918s9918.346               
+     000009C1  RDVRM                              
+     000009C1  vdp_tms9918s9918.357               
+     000009C4  vdp_tms9918s9918.361               
+     000009C6  vdp_tms9918s9918.363               
+     000009C7  vdp_tms9918s9918.367               
+     000009C8  vdp_tms9918s9918.368               
+     000009CB  vdp_tms9918s9918.369               
+     000009CC  vdp_tms9918s9918.370               
+     000009CE  vdp_tms9918s9918.371               
+     000009CF  vdp_tms9918s9918.372               
+     000009D1  vdp_tms9918s9918.373               
+     000009D3  vdp_tms9918s9918.374               
+     000009D5  vdp_tms9918s9918.376               
+     000009D6  vdp_tms9918s9918.377               
+     000009D8  vdp_tms9918s9918.378               
+     000009D9  vdp_tms9918s9918.379               
+     000009DB  vdp_tms9918s9918.380               
+     000009DD  vdp_tms9918s9918.381               
+     000009DE  vdp_tms9918s9918.383               
+     000009DF  FILVRM                             
+     000009DF  vdp_tms9918s9918.396               
+     000009E0  vdp_tms9918s9918.397               
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000178    0000095C =        2396. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000009E2  vdp_tms9918s9918.399               
+     000009E5  vdp_tms9918s9918.402               
+     000009E7  vdp_tms9918s9918.404               
+     000009E8  vdp_tms9918s9918.405               
+     000009E9  vdp_tms9918s9918.406               
+     000009EA  vdp_tms9918s9918.407               
+     000009EC  vdp_tms9918s9918.409               
+     000009ED  LDIRVM                             
+     000009ED  vdp_tms9918s9918.423               
+     000009EE  vdp_tms9918s9918.425               
+     000009F1  vdp_tms9918s9918.427               
+     000009F2  vdp_tms9918s9918.429               
+     000009F3  vdp_tms9918s9918.430               
+     000009F4  vdp_tms9918s9918.432               
+     000009F6  vdp_tms9918s9918.435               
+     000009F8  vdp_tms9918s9918.437               
+     000009F9  vdp_tms9918s9918.438               
+     000009FA  vdp_tms9918s9918.439               
+     000009FB  vdp_tms9918s9918.440               
+     000009FD  vdp_tms9918s9918.442               
+     000009FE  LDIRMV                             
+     000009FE  vdp_tms9918s9918.455               
+     00000A01  vdp_tms9918s9918.459               
+     00000A02  vdp_tms9918s9918.461               
+     00000A03  vdp_tms9918s9918.462               
+     00000A04  vdp_tms9918s9918.464               
+     00000A06  vdp_tms9918s9918.467               
+     00000A08  vdp_tms9918s9918.469               
+     00000A09  vdp_tms9918s9918.470               
+     00000A0A  vdp_tms9918s9918.471               
+     00000A0B  vdp_tms9918s9918.472               
+     00000A0D  vdp_tms9918s9918.474               
+     00000A0E  _malloc                            heap
+     00000A2A  __divuint                          
+     00000A32  __divuchar                         
+     00000A39  __divu8                            
+     00000A3C  __divu16                           
+     00000A6B  ___sdcc_enter_ix                   
+     00000A75  __moduchar                         
+     00000A81  __moduint                          
+     00000A8C  __divsint                          
+     00000A95  __divschar                         
+     00000A9C  __div8                             
+     00000AA0  __div_signexte                     
+     00000AA4  __div16                            
+     00000ACA  __get_remainder                    
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00000AD4    00000012 =          18. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000AD4  _head                              sc2view
+     00000AD6  _data                              sc2view
+     00000AD8  _dosVersion                        msxdos
+     00000ADA  _last_error                        msxdos
+     00000ADB  _a                                 msxdos
+     00000ADC  _hl                                msxdos
+     00000ADE  _bc                                msxdos
+     00000AE0  _de                                msxdos
+     00000AE2  _ix                                msxdos
+     00000AE4  _iy                                msxdos
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZED                        00000AE6    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000AE6  _dosType                           msxdos
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00000AE7    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000AE7  gsinit                             
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            00000AE7    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZER                        00000AE8    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    0000001A =          26. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+
+Files Linked                              [ module(s) ]
+
+sc2view.rel                               [ sc2view ]
+out/crt0msx.16k.4000.rel                  [  ]
+out/conio.rel                             [ conio ]
+out/msxdos.rel                            [ msxdos ]
+out/vdp_tms9918.rel                       [  ]
+out/heap.rel                              [ heap ]
+
+
+Libraries Linked                          [ object file ]
+
+/usr/bin/../share/sdcc/lib/z80/z80.lib    [ divunsigned.rel ]
+/usr/bin/../share/sdcc/lib/z80/z80.lib    [ crtenter.rel ]
+/usr/bin/../share/sdcc/lib/z80/z80.lib    [ modunsigned.rel ]
+/usr/bin/../share/sdcc/lib/z80/z80.lib    [ divsigned.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+
+User Base Address Definitions
+
+_CODE = 0x0178
+_DATA = 0x0000
+
+
+?ASlink-Warning-Undefined Global '_heap_top' referenced by module 'heap'

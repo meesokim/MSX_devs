@@ -1,0 +1,360 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.8.0 #10562 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module sc2view
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _malloc
+                             13 	.globl _copyToVRAM
+                             14 	.globl _color
+                             15 	.globl _screen
+                             16 	.globl _cprintf
+                             17 	.globl _getch
+                             18 	.globl _read
+                             19 	.globl _close
+                             20 	.globl _open
+                             21 	.globl _getLastDOSError
+                             22 	.globl _getDOSType
+                             23 	.globl _data
+                             24 	.globl _head
+                             25 ;--------------------------------------------------------
+                             26 ; special function registers
+                             27 ;--------------------------------------------------------
+                             28 ;--------------------------------------------------------
+                             29 ; ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _DATA
+   0000                      32 _head::
+   0000                      33 	.ds 2
+   0002                      34 _data::
+   0002                      35 	.ds 2
+                             36 ;--------------------------------------------------------
+                             37 ; ram data
+                             38 ;--------------------------------------------------------
+                             39 	.area _INITIALIZED
+                             40 ;--------------------------------------------------------
+                             41 ; absolute external ram data
+                             42 ;--------------------------------------------------------
+                             43 	.area _DABS (ABS)
+                             44 ;--------------------------------------------------------
+                             45 ; global & static initialisations
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _GSINIT
+                             49 	.area _GSFINAL
+                             50 	.area _GSINIT
+                             51 ;--------------------------------------------------------
+                             52 ; Home
+                             53 ;--------------------------------------------------------
+                             54 	.area _HOME
+                             55 	.area _HOME
+                             56 ;--------------------------------------------------------
+                             57 ; code
+                             58 ;--------------------------------------------------------
+                             59 	.area _CODE
+                             60 ;src/sc2view.c:32: int main(char** argv, int argc) {
+                             61 ;	---------------------------------
+                             62 ; Function main
+                             63 ; ---------------------------------
+   0000                      64 _main::
+   0000 CDr00r00      [17]   65 	call	___sdcc_enter_ix
+   0003 F5            [11]   66 	push	af
+                             67 ;src/sc2view.c:34: byte errCode = 0;
+   0004 DD 36 FE 00   [19]   68 	ld	-2 (ix), #0x00
+                             69 ;src/sc2view.c:38: cprintf("SC2VIEW v1.0\n\rCopyleft 2018 @ishwin74\n\r");
+   0008 21r4Cr01      [10]   70 	ld	hl, #___str_0
+   000B E5            [11]   71 	push	hl
+   000C CDr00r00      [17]   72 	call	_cprintf
+   000F F1            [10]   73 	pop	af
+                             74 ;src/sc2view.c:40: if (argc == 0) {
+   0010 DD 7E 07      [19]   75 	ld	a, 7 (ix)
+   0013 DD B6 06      [19]   76 	or	a, 6 (ix)
+   0016 20 0E         [12]   77 	jr	NZ,00102$
+                             78 ;src/sc2view.c:41: cprintf("Usage: sc2view <filename>\n\r");
+   0018 21r74r01      [10]   79 	ld	hl, #___str_1
+   001B E5            [11]   80 	push	hl
+   001C CDr00r00      [17]   81 	call	_cprintf
+   001F F1            [10]   82 	pop	af
+                             83 ;src/sc2view.c:42: return 0;
+   0020 21 00 00      [10]   84 	ld	hl, #0x0000
+   0023 C3r48r01      [10]   85 	jp	00113$
+   0026                      86 00102$:
+                             87 ;src/sc2view.c:45: if (getDOSType() == DOSTYPE_MSXDOS1) {
+   0026 CDr00r00      [17]   88 	call	_getDOSType
+   0029 2D            [ 4]   89 	dec	l
+   002A 20 0E         [12]   90 	jr	NZ,00104$
+                             91 ;src/sc2view.c:46: cprintf("Error: MSXDOS 2.x needed!\n\r");
+   002C 21r90r01      [10]   92 	ld	hl, #___str_2
+   002F E5            [11]   93 	push	hl
+   0030 CDr00r00      [17]   94 	call	_cprintf
+   0033 F1            [10]   95 	pop	af
+                             96 ;src/sc2view.c:47: return 1;
+   0034 21 01 00      [10]   97 	ld	hl, #0x0001
+   0037 C3r48r01      [10]   98 	jp	00113$
+   003A                      99 00104$:
+                            100 ;src/sc2view.c:50: cprintf("Opening %s...\r\n", argv[0]);
+   003A DD 6E 04      [19]  101 	ld	l, 4 (ix)
+   003D DD 66 05      [19]  102 	ld	h, 5 (ix)
+   0040 E5            [11]  103 	push	hl
+   0041 5E            [ 7]  104 	ld	e, (hl)
+   0042 23            [ 6]  105 	inc	hl
+   0043 56            [ 7]  106 	ld	d, (hl)
+   0044 E1            [10]  107 	pop	hl
+   0045 01rACr01      [10]  108 	ld	bc, #___str_3+0
+   0048 E5            [11]  109 	push	hl
+   0049 D5            [11]  110 	push	de
+   004A C5            [11]  111 	push	bc
+   004B CDr00r00      [17]  112 	call	_cprintf
+   004E F1            [10]  113 	pop	af
+   004F F1            [10]  114 	pop	af
+   0050 E1            [10]  115 	pop	hl
+                            116 ;src/sc2view.c:51: h = open(argv[0], O_RDONLY);
+   0051 4E            [ 7]  117 	ld	c, (hl)
+   0052 23            [ 6]  118 	inc	hl
+   0053 46            [ 7]  119 	ld	b, (hl)
+   0054 3E 01         [ 7]  120 	ld	a, #0x01
+   0056 F5            [11]  121 	push	af
+   0057 33            [ 6]  122 	inc	sp
+   0058 C5            [11]  123 	push	bc
+   0059 CDr00r00      [17]  124 	call	_open
+   005C F1            [10]  125 	pop	af
+   005D 33            [ 6]  126 	inc	sp
+   005E DD 75 FF      [19]  127 	ld	-1 (ix), l
+                            128 ;src/sc2view.c:52: if (getLastDOSError()) {
+   0061 CDr00r00      [17]  129 	call	_getLastDOSError
+   0064 7D            [ 4]  130 	ld	a, l
+   0065 B7            [ 4]  131 	or	a, a
+   0066 28 0E         [12]  132 	jr	Z,00106$
+                            133 ;src/sc2view.c:53: cprintf("Error opening file!\r\n");
+   0068 21rBCr01      [10]  134 	ld	hl, #___str_4
+   006B E5            [11]  135 	push	hl
+   006C CDr00r00      [17]  136 	call	_cprintf
+   006F F1            [10]  137 	pop	af
+                            138 ;src/sc2view.c:54: return 2;
+   0070 21 02 00      [10]  139 	ld	hl, #0x0002
+   0073 C3r48r01      [10]  140 	jp	00113$
+   0076                     141 00106$:
+                            142 ;src/sc2view.c:57: head = malloc(sizeof(SC2HEAD));
+   0076 21 07 00      [10]  143 	ld	hl, #0x0007
+   0079 E5            [11]  144 	push	hl
+   007A CDr00r00      [17]  145 	call	_malloc
+   007D F1            [10]  146 	pop	af
+   007E 22r00r00      [16]  147 	ld	(_head), hl
+                            148 ;src/sc2view.c:58: read(h, head, sizeof(SC2HEAD));
+   0081 2Ar00r00      [16]  149 	ld	hl, (_head)
+   0084 01 07 00      [10]  150 	ld	bc, #0x0007
+   0087 C5            [11]  151 	push	bc
+   0088 E5            [11]  152 	push	hl
+   0089 DD 7E FF      [19]  153 	ld	a, -1 (ix)
+   008C F5            [11]  154 	push	af
+   008D 33            [ 6]  155 	inc	sp
+   008E CDr00r00      [17]  156 	call	_read
+   0091 F1            [10]  157 	pop	af
+   0092 F1            [10]  158 	pop	af
+   0093 33            [ 6]  159 	inc	sp
+                            160 ;src/sc2view.c:59: if (getLastDOSError()) {
+   0094 CDr00r00      [17]  161 	call	_getLastDOSError
+   0097 7D            [ 4]  162 	ld	a, l
+   0098 B7            [ 4]  163 	or	a, a
+   0099 28 0E         [12]  164 	jr	Z,00108$
+                            165 ;src/sc2view.c:60: cprintf("Error reading file!\r\n");
+   009B 21rD2r01      [10]  166 	ld	hl, #___str_5
+   009E E5            [11]  167 	push	hl
+   009F CDr00r00      [17]  168 	call	_cprintf
+   00A2 F1            [10]  169 	pop	af
+                            170 ;src/sc2view.c:61: return 2;
+   00A3 21 02 00      [10]  171 	ld	hl, #0x0002
+   00A6 C3r48r01      [10]  172 	jp	00113$
+   00A9                     173 00108$:
+                            174 ;src/sc2view.c:64: size = head->end - head->ini;
+   00A9 ED 5Br00r00   [20]  175 	ld	de, (_head)
+   00AD 6B            [ 4]  176 	ld	l, e
+   00AE 62            [ 4]  177 	ld	h, d
+   00AF 23            [ 6]  178 	inc	hl
+   00B0 23            [ 6]  179 	inc	hl
+   00B1 23            [ 6]  180 	inc	hl
+   00B2 4E            [ 7]  181 	ld	c, (hl)
+   00B3 23            [ 6]  182 	inc	hl
+   00B4 46            [ 7]  183 	ld	b, (hl)
+   00B5 EB            [ 4]  184 	ex	de,hl
+   00B6 23            [ 6]  185 	inc	hl
+   00B7 5E            [ 7]  186 	ld	e, (hl)
+   00B8 23            [ 6]  187 	inc	hl
+   00B9 56            [ 7]  188 	ld	d, (hl)
+   00BA 79            [ 4]  189 	ld	a, c
+   00BB 93            [ 4]  190 	sub	a, e
+   00BC 4F            [ 4]  191 	ld	c, a
+   00BD 78            [ 4]  192 	ld	a, b
+   00BE 9A            [ 4]  193 	sbc	a, d
+   00BF 47            [ 4]  194 	ld	b, a
+                            195 ;src/sc2view.c:65: data = malloc(size);
+   00C0 C5            [11]  196 	push	bc
+   00C1 C5            [11]  197 	push	bc
+   00C2 CDr00r00      [17]  198 	call	_malloc
+   00C5 F1            [10]  199 	pop	af
+   00C6 C1            [10]  200 	pop	bc
+   00C7 22r02r00      [16]  201 	ld	(_data), hl
+                            202 ;src/sc2view.c:67: if (head->magic==0xFE && size<=16384) {
+   00CA 2Ar00r00      [16]  203 	ld	hl, (_head)
+   00CD 7E            [ 7]  204 	ld	a, (hl)
+   00CE D6 FE         [ 7]  205 	sub	a, #0xfe
+   00D0 20 5C         [12]  206 	jr	NZ,00110$
+   00D2 AF            [ 4]  207 	xor	a, a
+   00D3 B9            [ 4]  208 	cp	a, c
+   00D4 3E 40         [ 7]  209 	ld	a, #0x40
+   00D6 98            [ 4]  210 	sbc	a, b
+   00D7 38 55         [12]  211 	jr	C,00110$
+                            212 ;src/sc2view.c:69: screen(2);
+   00D9 C5            [11]  213 	push	bc
+   00DA 3E 02         [ 7]  214 	ld	a, #0x02
+   00DC F5            [11]  215 	push	af
+   00DD 33            [ 6]  216 	inc	sp
+   00DE CDr00r00      [17]  217 	call	_screen
+   00E1 33            [ 6]  218 	inc	sp
+   00E2 11 01 01      [10]  219 	ld	de, #0x0101
+   00E5 D5            [11]  220 	push	de
+   00E6 3E 0F         [ 7]  221 	ld	a, #0x0f
+   00E8 F5            [11]  222 	push	af
+   00E9 33            [ 6]  223 	inc	sp
+   00EA CDr00r00      [17]  224 	call	_color
+   00ED F1            [10]  225 	pop	af
+   00EE 33            [ 6]  226 	inc	sp
+   00EF C1            [10]  227 	pop	bc
+                            228 ;src/sc2view.c:72: read(h, data, size);
+   00F0 2Ar02r00      [16]  229 	ld	hl, (_data)
+   00F3 C5            [11]  230 	push	bc
+   00F4 C5            [11]  231 	push	bc
+   00F5 E5            [11]  232 	push	hl
+   00F6 DD 7E FF      [19]  233 	ld	a, -1 (ix)
+   00F9 F5            [11]  234 	push	af
+   00FA 33            [ 6]  235 	inc	sp
+   00FB CDr00r00      [17]  236 	call	_read
+   00FE F1            [10]  237 	pop	af
+   00FF F1            [10]  238 	pop	af
+   0100 33            [ 6]  239 	inc	sp
+   0101 C1            [10]  240 	pop	bc
+                            241 ;src/sc2view.c:73: copyToVRAM((word)data, head->ini, size);
+   0102 2Ar00r00      [16]  242 	ld	hl, (_head)
+   0105 23            [ 6]  243 	inc	hl
+   0106 5E            [ 7]  244 	ld	e, (hl)
+   0107 23            [ 6]  245 	inc	hl
+   0108 56            [ 7]  246 	ld	d, (hl)
+   0109 2Ar02r00      [16]  247 	ld	hl, (_data)
+   010C C5            [11]  248 	push	bc
+   010D D5            [11]  249 	push	de
+   010E E5            [11]  250 	push	hl
+   010F CDr00r00      [17]  251 	call	_copyToVRAM
+   0112 F1            [10]  252 	pop	af
+   0113 F1            [10]  253 	pop	af
+   0114 F1            [10]  254 	pop	af
+                            255 ;src/sc2view.c:75: getch();
+   0115 CDr00r00      [17]  256 	call	_getch
+                            257 ;src/sc2view.c:77: color(15, 4, 4);
+   0118 11 04 04      [10]  258 	ld	de, #0x0404
+   011B D5            [11]  259 	push	de
+   011C 3E 0F         [ 7]  260 	ld	a, #0x0f
+   011E F5            [11]  261 	push	af
+   011F 33            [ 6]  262 	inc	sp
+   0120 CDr00r00      [17]  263 	call	_color
+   0123 F1            [10]  264 	pop	af
+   0124 33            [ 6]  265 	inc	sp
+                            266 ;src/sc2view.c:78: screen(0);
+   0125 AF            [ 4]  267 	xor	a, a
+   0126 F5            [11]  268 	push	af
+   0127 33            [ 6]  269 	inc	sp
+   0128 CDr00r00      [17]  270 	call	_screen
+   012B 33            [ 6]  271 	inc	sp
+   012C 18 0C         [12]  272 	jr	00111$
+   012E                     273 00110$:
+                            274 ;src/sc2view.c:80: cprintf("Bad SCREEN 2 file format!\n\r");
+   012E 21rE8r01      [10]  275 	ld	hl, #___str_6
+   0131 E5            [11]  276 	push	hl
+   0132 CDr00r00      [17]  277 	call	_cprintf
+   0135 F1            [10]  278 	pop	af
+                            279 ;src/sc2view.c:81: errCode = 4;
+   0136 DD 36 FE 04   [19]  280 	ld	-2 (ix), #0x04
+   013A                     281 00111$:
+                            282 ;src/sc2view.c:84: close(h);
+   013A DD 7E FF      [19]  283 	ld	a, -1 (ix)
+   013D F5            [11]  284 	push	af
+   013E 33            [ 6]  285 	inc	sp
+   013F CDr00r00      [17]  286 	call	_close
+   0142 33            [ 6]  287 	inc	sp
+                            288 ;src/sc2view.c:86: return errCode;
+   0143 DD 6E FE      [19]  289 	ld	l, -2 (ix)
+   0146 26 00         [ 7]  290 	ld	h, #0x00
+   0148                     291 00113$:
+                            292 ;src/sc2view.c:87: }
+   0148 F1            [10]  293 	pop	af
+   0149 DD E1         [14]  294 	pop	ix
+   014B C9            [10]  295 	ret
+   014C                     296 ___str_0:
+   014C 53 43 32 56 49 45   297 	.ascii "SC2VIEW v1.0"
+        57 20 76 31 2E 30
+   0158 0A                  298 	.db 0x0a
+   0159 0D                  299 	.db 0x0d
+   015A 43 6F 70 79 6C 65   300 	.ascii "Copyleft 2018 @ishwin74"
+        66 74 20 32 30 31
+        38 20 40 69 73 68
+        77 69 6E 37 34
+   0171 0A                  301 	.db 0x0a
+   0172 0D                  302 	.db 0x0d
+   0173 00                  303 	.db 0x00
+   0174                     304 ___str_1:
+   0174 55 73 61 67 65 3A   305 	.ascii "Usage: sc2view <filename>"
+        20 73 63 32 76 69
+        65 77 20 3C 66 69
+        6C 65 6E 61 6D 65
+        3E
+   018D 0A                  306 	.db 0x0a
+   018E 0D                  307 	.db 0x0d
+   018F 00                  308 	.db 0x00
+   0190                     309 ___str_2:
+   0190 45 72 72 6F 72 3A   310 	.ascii "Error: MSXDOS 2.x needed!"
+        20 4D 53 58 44 4F
+        53 20 32 2E 78 20
+        6E 65 65 64 65 64
+        21
+   01A9 0A                  311 	.db 0x0a
+   01AA 0D                  312 	.db 0x0d
+   01AB 00                  313 	.db 0x00
+   01AC                     314 ___str_3:
+   01AC 4F 70 65 6E 69 6E   315 	.ascii "Opening %s..."
+        67 20 25 73 2E 2E
+        2E
+   01B9 0D                  316 	.db 0x0d
+   01BA 0A                  317 	.db 0x0a
+   01BB 00                  318 	.db 0x00
+   01BC                     319 ___str_4:
+   01BC 45 72 72 6F 72 20   320 	.ascii "Error opening file!"
+        6F 70 65 6E 69 6E
+        67 20 66 69 6C 65
+        21
+   01CF 0D                  321 	.db 0x0d
+   01D0 0A                  322 	.db 0x0a
+   01D1 00                  323 	.db 0x00
+   01D2                     324 ___str_5:
+   01D2 45 72 72 6F 72 20   325 	.ascii "Error reading file!"
+        72 65 61 64 69 6E
+        67 20 66 69 6C 65
+        21
+   01E5 0D                  326 	.db 0x0d
+   01E6 0A                  327 	.db 0x0a
+   01E7 00                  328 	.db 0x00
+   01E8                     329 ___str_6:
+   01E8 42 61 64 20 53 43   330 	.ascii "Bad SCREEN 2 file format!"
+        52 45 45 4E 20 32
+        20 66 69 6C 65 20
+        66 6F 72 6D 61 74
+        21
+   0201 0A                  331 	.db 0x0a
+   0202 0D                  332 	.db 0x0d
+   0203 00                  333 	.db 0x00
+                            334 	.area _CODE
+                            335 	.area _INITIALIZER
+                            336 	.area _CABS (ABS)

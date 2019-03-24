@@ -1,0 +1,201 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ; crt0 for MSX ROM of 32KB, starting at 0x4000
+                              2 ; includes detection and set of ROM page 2 (0x8000 - 0xbfff)
+                              3 ; suggested options: --code-loc 0x4020 --data-loc 0xc000
+                              4 
+                              5 .globl	_main
+                              6 .globl	_putchar
+                              7 .globl	_getchar
+                              8 
+                              9 .area _HEADER (ABS)
+                             10 ; Reset vector
+   4000                      11 	.org 0x4000
+   4000 41                   12 	.db  0x41
+   4001 42                   13 	.db  0x42
+   4002 10 40                14 	.dw  init
+   4004 00 00                15 	.dw  0x0000
+   4006 00 00                16 	.dw  0x0000
+   4008 00 00                17 	.dw  0x0000
+   400A 00 00                18 	.dw  0x0000
+   400C 00 00                19 	.dw  0x0000
+   400E 00 00                20 	.dw  0x0000
+                             21 ;
+                             22 ;	.ascii "END ROMHEADER"
+                             23 ;
+                             24 
+   4010                      25 init:
+   4010 ED 7B 4A FC   [20]   26 	ld      sp,(0xfc4a) ; Stack at the top of memory.
+   4014 CD 4A 00      [17]   27 	call    find_rom_page_2
+   4017 CD 00 00      [17]   28 	call    _main ; Initialise global variables
+   401A CD 00 00      [17]   29 	call    #0x0000; call CHKRAM
+                             30 
+                             31 ; Ordering of segments for the linker.
+                             32 	.area	_CODE
+                             33 
+                             34 ;char.c:3: void putchar(char chr) {
+                             35 ;	---------------------------------
+                             36 ; Function putchar
+                             37 ; ---------------------------------
+   0000                      38 _putchar_start::
+   0000                      39 _putchar:
+   0000 DD E5         [15]   40 	push ix
+   0002 DD 21 00 00   [14]   41 	ld   ix, #0
+   0006 DD 39         [15]   42 	add  ix, sp
+                             43 ;char.c:7: __endasm;
+   0008 DD 7E 04      [19]   44 	ld   a, 4(ix)
+   000B FE 0A         [ 7]   45 	cp   a, #0x0a
+   000D 20 07         [12]   46 	jr   nz, 2$
+   000F                      47 1$:
+   000F 3E 0D         [ 7]   48 	ld   a, #0x0d
+   0011 CD A2 00      [17]   49 	call 0x00A2 ; call CHPUT
+   0014 3E 0A         [ 7]   50 	ld   a, #0x0a
+   0016                      51 2$:
+   0016 CD A2 00      [17]   52 	call 0x00A2 ; call CHPUT
+   0019 DD E1         [14]   53 	pop  ix
+   001B C9            [10]   54 	ret
+   001C                      55 _putchar_end::
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                             56 
+                             57 ;char.c:10: char getchar(void) {
+                             58 ;	---------------------------------
+                             59 ; Function getchar
+                             60 ; ---------------------------------
+   001C                      61 _getchar_start::
+   001C                      62 _getchar:
+                             63 ;char.c:15: __endasm;
+   001C CD 9F 00      [17]   64 	call 0x009F
+   001F 26 00         [ 7]   65 	ld h,#0x00
+   0021 6F            [ 4]   66 	ld l,a
+   0022 C9            [10]   67 	ret
+   0023                      68 _getchar_end::
+                             69 
+                             70 	.area   _GSINIT
+                             71 	.area   _GSFINAL
+                             72 
+                             73 	.area   _DATA
+                             74 	.area   _BSS
+                             75 	.area   _CODE
+                             76 
+                             77 ; ------------------------------------------
+                             78 ; Special RLE decoder used for initing global data
+                             79 
+   0023                      80 __initrleblock::
+                             81 	; Pull the destination address out
+   0023 4D            [ 4]   82 	ld      c,l
+   0024 44            [ 4]   83 	ld      b,h
+                             84 	; Pop the return address
+   0025 E1            [10]   85 	pop     hl
+   0026                      86 1$:
+                             87 	; Fetch the run
+   0026 5E            [ 7]   88 	ld      e,(hl)
+   0027 23            [ 6]   89 	inc     hl
+                             90 	; Negative means a run
+   0028 CB 7B         [ 8]   91 	bit     7,e
+   002A CA 38 00      [10]   92 	jp      z,2$
+                             93 	; Code for expanding a run
+   002D 7E            [ 7]   94 	ld      a,(hl)
+   002E 23            [ 6]   95 	inc     hl
+   002F                      96 3$:
+   002F 02            [ 7]   97 	ld      (bc),a
+   0030 03            [ 6]   98 	inc     bc
+   0031 1C            [ 4]   99 	inc     e
+   0032 C2 2F 00      [10]  100 	jp      nz,3$
+   0035 C3 26 00      [10]  101 	jp      1$
+   0038                     102 2$:
+                            103 	; Zero means end of a block
+   0038 AF            [ 4]  104 	xor     a
+   0039 B3            [ 4]  105 	or      e
+   003A CA 48 00      [10]  106 	jp      z,4$
+                            107 	; Code for expanding a block
+   003D                     108 5$:
+   003D 7E            [ 7]  109 	ld      a,(hl)
+   003E 23            [ 6]  110 	inc     hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+   003F 02            [ 7]  111 	ld      (bc),a
+   0040 03            [ 6]  112 	inc     bc
+   0041 1D            [ 4]  113 	dec     e
+   0042 C2 3D 00      [10]  114 	jp      nz,5$
+   0045 C3 26 00      [10]  115 	jp      1$
+   0048                     116 4$:
+                            117 	; Push the return address back onto the stack
+   0048 E5            [11]  118 	push    hl
+   0049 C9            [10]  119 	ret
+                            120 
+                            121 ;------------------------------------------------
+                            122 ; find_rom_page_2
+                            123 ; original name     : LOCALIZAR_SEGUNDA_PAGINA
+                            124 ; Original author   : Eduardo Robsy Petrus
+                            125 ; Snippet taken from: http://karoshi.auic.es/index.php?topic=117.msg1465
+                            126 ;
+                            127 ; Rutina que localiza la segunda pagina de 16 KB
+                            128 ; de una ROM de 32 KB ubicada en 4000h
+                            129 ; Basada en la rutina de Konami-
+                            130 ; Compatible con carga en RAM
+                            131 ; Compatible con expansores de slots
+                            132 ;------------------------------------------------
+                            133 ; Comprobacion de RAM/ROM
+                            134 
+   004A                     135 find_rom_page_2::
+   004A 21 00 40      [10]  136 	ld hl, #0x4000
+   004D 46            [ 7]  137 	ld b, (hl)
+   004E AF            [ 4]  138 	xor a
+   004F 77            [ 7]  139 	ld (hl), a
+   0050 7E            [ 7]  140 	ld a, (hl)
+   0051 B7            [ 4]  141 	or a
+   0052 20 02         [12]  142 	jr nz,5$ ; jr nz,@@ROM
+                            143 	; El programa esta en RAM - no buscar
+   0054 70            [ 7]  144 	ld (hl),b
+   0055 C9            [10]  145 	ret
+   0056                     146 5$: ; ----------- @@ROM:
+   0056 F3            [ 4]  147 	di
+                            148 	; Slot primario
+   0057 CD 38 01      [17]  149 	call #0x0138 ; call RSLREG
+   005A 0F            [ 4]  150 	rrca
+   005B 0F            [ 4]  151 	rrca
+   005C E6 03         [ 7]  152 	and #0x03
+                            153 	; Slot secundario
+   005E 4F            [ 4]  154 	ld c, a
+   005F 21 C1 FC      [10]  155 	ld hl, #0xfcc1
+   0062 85            [ 4]  156 	add a, l
+   0063 6F            [ 4]  157 	ld l, a
+   0064 7E            [ 7]  158 	ld a, (hl)
+   0065 E6 80         [ 7]  159 	and #0x80
+   0067 B1            [ 4]  160 	or c
+   0068 4F            [ 4]  161 	ld c, a
+   0069 2C            [ 4]  162 	inc l
+   006A 2C            [ 4]  163 	inc l
+   006B 2C            [ 4]  164 	inc l
+   006C 2C            [ 4]  165 	inc l
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+   006D 7E            [ 7]  166 	ld a, (hl)
+                            167 	; Definir el identificador de slot
+   006E E6 0C         [ 7]  168 	and #0x0c
+   0070 B1            [ 4]  169 	or c
+   0071 26 80         [ 7]  170 	ld h, #0x80
+                            171 	; Habilitar permanentemente
+   0073 CD 24 00      [17]  172 	call #0x0024 ; call ENASLT
+   0076 FB            [ 4]  173 	ei
+   0077 C9            [10]  174 	ret
+                            175 ;------------------------------------------------
+                            176 
+                            177 	.area   _GSINIT
+                            178 
+   0000                     179 gsinit::
+                            180 	.area   _GSFINAL
+   0000 C9            [10]  181 	ret
