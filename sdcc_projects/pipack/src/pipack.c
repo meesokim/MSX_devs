@@ -66,12 +66,22 @@ void easyrun(int i)
 	ld a, (hl)
 	cp #0x41
 	jr nz, next
-	ld	hl,(#0x4002)
-	push	hl
+	ld  hl,(#0x4008)
+	ld a, h
+	or l
+	jr nz, basic
+	ld	hl,(#0x400e)
+	jp (hl)
 	ret
 next:
-	ld hl,(#0x8002)
-	push	hl
+	ld  hl,(#0x8008)
+	ld a, h
+	or l
+	jr nz, basic
+	ld hl,(#0x800e)
+	jp (hl)
+basic:
+	jp 0
 	ret
 	__endasm;
 }
@@ -154,7 +164,7 @@ void main(void) {
 	locate(8,23);
 	printf(" meeso.kim@gmail.com ");
 	vpoke(0x3bf,0x1b);
-	if (cursor > 22)
+	if (cursor > 11)
 		cstart = cursor - 11;
 	else
 		cstart = 0;
