@@ -62,6 +62,7 @@ void easyrun(int i)
 	nop
 	nop
 	nop
+	ld sp, #0xf380
 	ld  hl,#0x4000
 	ld a, (hl)
 	cp #0x41
